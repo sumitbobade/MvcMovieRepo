@@ -18,6 +18,10 @@ namespace MvcMovie.Controllers
             _context = context;
         }
 
+        public MoviesController()
+        {
+        }
+
         // GET: Movies
         public async Task<IActionResult> Index(string movieGenre, string searchString)
         {
@@ -40,8 +44,18 @@ namespace MvcMovie.Controllers
             //return View(await movies.ToListAsync());
         }
 
-        // GET: Movies/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public string GetMovieName(int? id)
+        {
+            var movie = from m in _context.Movie.Where(m => m.ID == id) select m.Title;
+            if (movie == null)
+            {
+                return null;
+            }
+                return movie.ToString();
+        }
+
+            // GET: Movies/Details/5
+            public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
