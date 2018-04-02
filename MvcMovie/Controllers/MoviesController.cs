@@ -44,6 +44,16 @@ namespace MvcMovie.Controllers
             //return View(await movies.ToListAsync());
         }
 
+        public Movie GetMovie(int? id)
+        {
+            var movie = from m in _context.Movie.Where(m => m.ID == id) select m;
+            if (movie == null)
+            {
+                return null;
+            }
+            return movie.FirstOrDefault<Movie>();
+        }
+
         public string GetMovieName(int? id)
         {
             var movie = from m in _context.Movie.Where(m => m.ID == id) select m.Title;
