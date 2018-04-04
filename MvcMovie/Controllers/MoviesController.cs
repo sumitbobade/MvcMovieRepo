@@ -56,6 +56,7 @@ namespace MvcMovie.Controllers
 
         public string GetMovieName(int? id)
         {
+
             var movie = from m in _context.Movie.Where(m => m.ID == id) select m.Title;
             if (movie == null)
             {
@@ -64,8 +65,18 @@ namespace MvcMovie.Controllers
                 return movie.ToString();
         }
 
-            // GET: Movies/Details/5
-            public async Task<IActionResult> Details(int? id)
+        public string GetMovieNames(int? id)
+        {
+
+            var movie = from m in _context.Movie.Where(m => m.ID == id) select m.Title;
+            if (movie == null)
+            {
+                return null;
+            }
+            return movie.ToString();
+        }
+        // GET: Movies/Details/5
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
